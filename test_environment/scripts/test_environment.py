@@ -35,42 +35,44 @@ def main():
 
     start_state: moveit_msgs.msg.RobotState = move_group.get_current_state()
     
-    start_state.joint_state.position = (
-        radians(45),
-        radians(101),
-        radians(-108),
-        radians(84),
-        radians(-169),
-        radians(-31),
-        radians(-13),
-        *start_state.joint_state.position[7:],
-    )
-    
-    move_group.set_start_state(start_state)
-    move_group.set_goal_joint_tolerance(1e-6)
-    
-    joint_goal = move_group.get_current_joint_values()
-    joint_goal[0] = -0.6297555433686766
-    joint_goal[1] = 0.7004650602444055
-    joint_goal[2] = 0.08393550285275565
-    joint_goal[3] = 1.620558404639375
-    joint_goal[4] = -2.9109985961500664
-    joint_goal[5] = -0.9425748749512245
-    joint_goal[6] = -0.47314676349031026
-        
+    tasks = {
+        "easy": {
+            "plan_time": 60,
+            "start": (radians(-108), radians(90), radians(-115), radians(126), radians(-207), radians(59), radians(113)),
+            "goal": (radians(113), radians(48), radians(55), radians(128), radians(-22), radians(-60), radians(152)),
+        },
+        "hard": {
+            "plan_time": 300, 
+            "start": (radians(45), radians(101), radians(-108), radians(84), radians(-169), radians(-31), radians(-13)),
+            "goal": (-0.6297555433686766, 0.7004650602444055, 0.08393550285275565, 1.620558404639375, -2.9109985961500664, -0.9425748749512245, -0.47314676349031026),
+        }
+    }
     planners = ["RRTConnect", "BiTRRT", "ABITstar", "AITstar", "EITstar", "EIRMstar"]
     
-    for p in planners:
-        move_group.set_planner_id(p)
-        move_group.set_planning_time(120)
-        success, traj, planning_time, error_code = move_group.plan(joint_goal)
-        traj_time = traj.joint_trajectory.points[-1].time_from_start.to_sec() if success else 0
-        print(f"[{p}] Success: {success}, Planning time: {planning_time}, trajectory time: {traj_time}")
-        display_trajectory = moveit_msgs.msg.DisplayTrajectory()
-        display_trajectory.trajectory_start = robot.get_current_state()
-        display_trajectory.trajectory.append(traj)
-        display_trajectory_publisher.publish(display_trajectory)
-        rospy.sleep(5)
+    for tn, task in tasks.items():
+        print(f"Starting task: {tn}")
+        start_state.joint_state.position = (
+            *task["start"],
+            *start_state.joint_state.position[7:],
+        )
+        
+        move_group.set_start_state(start_state)
+        move_group.set_goal_joint_tolerance(1e-6)
+        
+        joint_goal = move_group.get_current_joint_values()
+        joint_goal[0:7] = list(task["goal"])
+        
+        for p in planners:
+            move_group.set_planner_id(p)
+            move_group.set_planning_time(task["plan_time"])
+            success, traj, planning_time, error_code = move_group.plan(joint_goal)
+            traj_time = traj.joint_trajectory.points[-1].time_from_start.to_sec() if success else 0
+            print(f"[{p}] Success: {success}, Planning time: {planning_time if success else task['plan_time']}, trajectory time: {traj_time}")
+            display_trajectory = moveit_msgs.msg.DisplayTrajectory()
+            display_trajectory.trajectory_start = robot.get_current_state()
+            display_trajectory.trajectory.append(traj)
+            display_trajectory_publisher.publish(display_trajectory)
+            rospy.sleep(5)
 
 
 if __name__ == "__main__":
@@ -78,19 +80,3 @@ if __name__ == "__main__":
     rospy.init_node("move_group_python_interface_tutorial", anonymous=True)
     main()
     rospy.spin()
-
-
-        # radians(-68),
-        # radians(78),
-        # radians(55),
-        # radians(81),
-        # radians(-156),
-        # radians(-88),
-        # radians(144),
-    # joint_goal[0] = radians(-34)
-    # joint_goal[1] = radians(39)
-    # joint_goal[2] = radians(1)
-    # joint_goal[3] = radians(93)
-    # joint_goal[4] = radians(-166)
-    # joint_goal[5] = radians(-55)
-    # joint_goal[6] = radians(-27)
