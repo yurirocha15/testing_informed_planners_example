@@ -42,7 +42,7 @@ def main():
             "goal": (radians(113), radians(48), radians(55), radians(128), radians(-22), radians(-60), radians(152)),
         },
         "hard": {
-            "plan_time": 300, 
+            "plan_time": 800, 
             "start": (radians(45), radians(101), radians(-108), radians(84), radians(-169), radians(-31), radians(-13)),
             "goal": (-0.6297555433686766, 0.7004650602444055, 0.08393550285275565, 1.620558404639375, -2.9109985961500664, -0.9425748749512245, -0.47314676349031026),
         }
