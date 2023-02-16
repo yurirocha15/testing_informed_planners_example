@@ -38,3 +38,11 @@
     local-name: panda_moveit_config
     uri: https://github.com/ros-planning/panda_moveit_config.git
     version: noetic-devel
+- git:
+    local-name: barrett_moveit
+    uri: https://github.com/jhu-lcsr/barrett_moveit.git
+    version: devel
+- git:
+    local-name: barrett_model
+    uri: https://github.com/jhu-lcsr/barrett_model.git
+    version: devel

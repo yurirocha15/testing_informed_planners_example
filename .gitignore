@@ -50,5 +50,9 @@ qtcreator-*
 # Catkin custom files
 CATKIN_IGNORE
 
+# rosinstall
+.rosinstall
+*.bak
+
 # vscode
 .vscode/

@@ -13,3 +13,4 @@ ${SUDO} apt install -y python3-wstool python3-catkin-tools python3-rosdep
 wstool init .
 wstool merge -t . ./packages.rosinstall
 wstool update -t .
+rosdep update && rosdep install -r -y --from-paths . --ignore-src --rosdistro ${ROS_DISTRO} -y

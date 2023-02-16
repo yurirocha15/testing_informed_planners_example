@@ -4,10 +4,12 @@ project(test_environment)
 ## Compile as C++11, supported in ROS Kinetic and newer
 # add_compile_options(-std=c++11)
 
+list(APPEND CATKIN_SOURCES rospy moveit_core barrett_model barrett_wam_moveit_config)
+
 ## Find catkin macros and libraries
 ## if COMPONENTS list like find_package(catkin REQUIRED COMPONENTS xyz)
 ## is used, also find other catkin packages
-find_package(catkin REQUIRED)
+find_package(catkin REQUIRED COMPONENTS ${CATKIN_SOURCES})
 
 ## System dependencies are found with CMake's conventions
 # find_package(Boost REQUIRED COMPONENTS system)
@@ -101,7 +103,7 @@ find_package(catkin REQUIRED)
 catkin_package(
 #  INCLUDE_DIRS include
 #  LIBRARIES test_environment
-#  CATKIN_DEPENDS other_catkin_pkg
+ CATKIN_DEPENDS ${CATKIN_SOURCES}
 #  DEPENDS system_lib
 )
 

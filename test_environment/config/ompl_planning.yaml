@@ -1,0 +1,98 @@
+planner_configs:
+  SBLkConfigDefault:
+    type: geometric::SBL
+  ESTkConfigDefault:
+    type: geometric::EST
+  LBKPIECEkConfigDefault:
+    type: geometric::LBKPIECE
+  BKPIECEkConfigDefault:
+    type: geometric::BKPIECE
+  KPIECEkConfigDefault:
+    type: geometric::KPIECE
+  RRTkConfigDefault:
+    type: geometric::RRT
+  RRTConnect:
+    type: geometric::RRTConnect
+  RRTstarkConfigDefault:
+    type: geometric::RRTstar
+  TRRTkConfigDefault:
+    type: geometric::TRRT
+  PRMkConfigDefault:
+    type: geometric::PRM
+  PRMstarkConfigDefault:
+    type: geometric::PRMstar
+  BiTRRT:
+    cost_threshold: 1e300
+    frontier_node_ratio: 0.1
+    frontier_threshold: 0.01
+    init_temperature: 100
+    optimization_objective: PathLengthOptimizationObjective
+    range: 0.1
+    temp_change_factor: 0.1
+    type: geometric::BiTRRT
+  AITstar:
+    samples_per_batch: 100
+    use_graph_pruning: true
+    use_k_nearest: true
+    rewire_factor: 1.001
+    find_approximate_solutions: false
+    optimization_objective: PathLengthOptimizationObjective
+    set_max_num_goals: 10
+    type: geometric::AITstar
+  ABITstar:
+    samples_per_batch: 100
+    use_graph_pruning: true
+    use_k_nearest: true
+    rewire_factor: 1.001
+    find_approximate_solutions: false
+    optimization_objective: PathLengthOptimizationObjective
+    set_max_num_goals: 10
+    type: geometric::ABITstar
+  BITstar:
+    samples_per_batch: 100
+    use_graph_pruning: true
+    use_k_nearest: true
+    rewire_factor: 1.001
+    find_approximate_solutions: false
+    optimization_objective: PathLengthOptimizationObjective
+    set_max_num_goals: 10
+    type: geometric::BITstar
+  EITstar:
+    samples_per_batch: 100
+    use_graph_pruning: true
+    use_k_nearest: true
+    rewire_factor: 1.001
+    find_approximate_solutions: false
+    optimization_objective: PathLengthOptimizationObjective
+    set_max_num_goals: 10
+    type: geometric::EITstar
+  EIRMstar:
+    samples_per_batch: 100
+    use_graph_pruning: true
+    use_k_nearest: true
+    rewire_factor: 1.001
+    find_approximate_solutions: false
+    optimization_objective: PathLengthOptimizationObjective
+    set_max_num_goals: 10
+    type: geometric::EIRMstar
+arm:
+  longest_valid_segment_fraction: 0.001
+  default_planner_config: RRTConnect
+  planner_configs:
+    - AITstar
+    - ABITstar
+    - BITstar
+    - EITstar
+    - EIRMstar
+    - BiTRRT
+    - SBLkConfigDefault
+    - ESTkConfigDefault
+    - LBKPIECEkConfigDefault
+    - BKPIECEkConfigDefault
+    - KPIECEkConfigDefault
+    - RRTkConfigDefault
+    - RRTConnect
+    - RRTstarkConfigDefault
+    - TRRTkConfigDefault
+    - PRMkConfigDefault
+    - PRMstarkConfigDefault

@@ -1,0 +1,9 @@
+zeros:
+  wam:
+    hand:
+      finger_1:
+        med_joint: 1.05
+      finger_2:
+        med_joint: 1.05
+      finger_3:
+        med_joint: 1.05
