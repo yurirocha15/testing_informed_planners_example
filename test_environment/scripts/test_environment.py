@@ -59,7 +59,6 @@ def main():
     joint_goal[6] = -0.47314676349031026
         
     planners = ["RRTConnect", "BiTRRT", "ABITstar", "AITstar", "EITstar", "EIRMstar"]
-    planners = ["EITstar", "EIRMstar"]
     
     for p in planners:
         move_group.set_planner_id(p)
